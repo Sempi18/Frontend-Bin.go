@@ -1,0 +1,132 @@
+:root {
+  --color-principal: #007bff;
+  --color-secundario: #28a745;
+  --color-fondo-claro: #f8f9fa;
+  --color-fondo-celda: #ffffff;
+  --color-texto-claro: #ffffff;
+  --color-texto-oscuro: #343a40;
+  --color-celda-borde: #dee2e6;
+  --color-gratis: #ffc107;
+  --tamano-celda: 75px;
+  --gap-cuadricula: 6px;
+  --padding-general: 20px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background-color: var(--color-fondo-claro);
+  margin: 0;
+  padding: var(--padding-general);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+  color: var(--color-texto-oscuro);
+  margin-bottom: var(--padding-general);
+  font-size: 2.5em;
+}
+
+#bingo-card {
+  display: grid;
+  /* El siguiente estilo hace que el cartón sea más responsivo */
+  grid-template-columns: repeat(5, minmax(60px, 1fr));
+  grid-template-rows: repeat(6, 1fr);
+  gap: var(--gap-cuadricula);
+  justify-content: center;
+  max-width: 500px; /* Un tamaño máximo razonable */
+  width: 90%; /* Ocupa la mayor parte del ancho en pantallas pequeñas */
+  background-color: var(--color-celda-borde);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.celda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-fondo-celda);
+  border: 1px solid var(--color-celda-borde);
+  font-size: 1.2em;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border-radius: 4px;
+  padding: 5px; /* Añadido para mejor espaciado en celdas más pequeñas */
+}
+
+.celda:hover:not(.encabezado):not(.marcada) {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.encabezado {
+  background-color: var(--color-principal);
+  color: var(--color-texto-claro);
+  font-weight: bold;
+  cursor: default;
+  text-transform: uppercase;
+  font-size: 1.3em;
+}
+
+.marcada {
+  background-color: var(--color-secundario);
+  color: var(--color-texto-claro);
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.gratis {
+  background-color: var(--color-gratis);
+  color: var(--color-texto-oscuro);
+  font-weight: bold;
+  cursor: default;
+  font-style: italic;
+}
+
+.controls {
+  margin-top: var(--padding-general);
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--color-principal);
+  color: var(--color-texto-claro);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.1s ease,
+    box-shadow 0.3s ease;
+  outline: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 500px) {
+  #bingo-card {
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    max-width: none;
+  }
+}
